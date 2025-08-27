@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>King's Gaming Zone — Subwar & Apex</title>
+  <meta name="description" content="Epic gaming site featuring Subwar: Surfaces and Apex Arena mini games. Built to host on GitHub Pages. Shows visitor IP." />
+  <style>
+    :root{
+      --bg1:#0f1020; --bg2:#0a1a2f; --neon:#00eaff; --neon2:#ff3efc; --text:#e6f6ff; --muted:#9bb3c7;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:System-UI,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Arial,sans-serif; color:var(--text);
+      background: radial-gradient(1200px 600px at 10% 10%, #13203b 0%, #0b1325 40%, #070a16 100%);
+      overflow-x:hidden;
+    }
+    /* Animated aurora background */
+    .aurora{
+      position:fixed; inset: -30vmax; z-index:-1; filter: blur(60px); opacity:.35; pointer-events:none;
+      background: conic-gradient(from 0deg, var(--neon) 0%, var(--neon2) 20%, #7cffcb 40%, #5b8cff 60%, #ff9a9e 80%, var(--neon) 100%);
+      animation: spin 30s linear infinite;
+    }
+    @keyframes spin{to{transform: rotate(360deg)}}
+
+    header{
+      position:sticky; top:0; backdrop-filter:saturate(140%) blur(8px);
+      background: linear-gradient(180deg, rgba(10,20,40,.8), rgba(10,20,40,.2));
+      border-bottom:1px solid rgba(255,255,255,.08); z-index:10;
+    }
+    .nav{max-width:1100px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:14px 18px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.5px}
+    .brand .logo{width:36px; height:36px; border-radius:12px; background:radial-gradient(circle at 30% 30%, var(--neon), transparent 60%), radial-gradient(circle at 70% 70%, var(--neon2), transparent 60%); box-shadow:0 0 20px var(--neon2) inset, 0 0 18px var(--neon)}
+    .nav a{color:var(--text); text-decoration:none; margin-left:18px; font-weight:600}
+    .nav a:hover{color:var(--neon)}
+
+    .hero{max-width:1100px; margin:40px auto; padding:24px; display:grid; grid-template-columns:1.1fr .9fr; gap:24px}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,.35);}
+    .card-inner{padding:22px}
+    h1{font-size:clamp(28px,4vw,44px); margin:8px 0 10px; line-height:1.1}
+    .sub{color:var(--muted)}
+
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; border:1px solid rgba(255,255,255,.12); cursor:pointer; font-weight:700; text-decoration:none; color:var(--text); background:linear-gradient(180deg, rgba(0,234,255,.25), rgba(255,62,252,.18)); box-shadow:0 8px 20px rgba(0,234,255,.18); transition:.2s}
+    .btn:hover{transform: translateY(-2px); box-shadow:0 14px 28px rgba(0,234,255,.24)}
+    .btn.secondary{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02))}
+
+    .section{max-width:1100px; margin:40px auto; padding:0 24px}
+    .grid{display:grid; grid-template-columns:repeat(12, 1fr); gap:20px}
+    .col-6{grid-column:span 6}
+    .col-12{grid-column:span 12}
+    @media (max-width:900px){.col-6{grid-column:span 12}}
+
+    /* IP widget */
+    .ip-box{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+    .ip-chip{padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:rgba(12,22,40,.6); font-weight:700}
+
+    /* Game cards */
+    .game-card header{position:relative; top:auto; backdrop-filter:none; background:none; border:none}
+    .game-title{font-size:20px; font-weight:900; letter-spacing:.5px}
+    canvas{width:100%; height:auto; background:radial-gradient(600px 300px at 50% 0%, rgba(0,234,255,.15), rgba(0,0,0,.65)); border-radius:16px; border:1px solid rgba(255,255,255,.08)}
+    .controls{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+
+    footer{max-width:1100px; margin:40px auto 60px; padding:0 24px; color:var(--muted)}
+    footer a{color:var(--neon)}
+  </style>
+</head>
+<body>
+  <div class="aurora"></div>
+
+  <header>
+    <nav class="nav">
+      <div class="brand"><div class="logo" aria-hidden="true"></div> King's Gaming Zone</div>
+      <div>
+        <a href="#ip">Server IP</a>
+        <a href="#subwar">Subwar</a>
+        <a href="#apex">Apex</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="card">
+      <div class="card-inner">
+        <h1>Subwar: Surfaces & Apex Arena</h1>
+        <p class="sub">Two fast mini‑games, neon vibes, and a built‑in IP widget so your crew can grab the server address. Perfect for GitHub Pages hosting.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:14px">
+          <a class="btn" href="#subwar">▶ Play Subwar</a>
+          <a class="btn secondary" href="#apex">⚔ Play Apex</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-inner">
+        <h2 id="ip" style="margin:0 0 10px">Server IP / Your IP</h2>
+        <p class="sub">Click to fetch the public IP (yours or a hosted server's reverse proxy). On GitHub Pages there's no fixed IP, so use a custom domain + CNAME. This widget shows the visitor IP.</p>
+        <div class="ip-box">
+          <div id="ipVal" class="ip-chip">IP: —</div>
+          <button class="btn" id="getIpBtn">Get My IP</button>
+          <button class="btn secondary" id="copyIpBtn">Copy</button>
+        </div>
+        <small class="sub">Tip: If you have a game server, replace the display text with your server's static IP/hostname.</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="grid">
+      <!-- Subwar Game -->
+      <div id="subwar" class="col-6">
+        <div class="card game-card">
+          <div class="card-inner">
+            <div class="game-title">🌊 Subwar: Surfaces</div>
+            <p class="sub">Pilot your sub through drifting mines. Arrow keys / WASD to move. Survive to score.</p>
+            <canvas id="subCanvas" width="560" height="360"></canvas>
+            <div class="controls">
+              <button class="btn" id="subStart">Start / Restart</button>
+              <div class="ip-chip" id="subScore">Score: 0</div>
+              <div class="ip-chip" id="subStatus">Ready</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Apex Arena Game -->
+      <div id="apex" class="col-6">
+        <div class="card game-card">
+          <div class="card-inner">
+            <div class="game-title">🚀 Apex Arena</div>
+            <p class="sub">Arcade shooter. Move ← →, Space to fire. Clear waves.</p>
+            <canvas id="apexCanvas" width="560" height="360"></canvas>
+            <div class="controls">
+              <button class="btn" id="apexStart">Start / Restart</button>
+              <div class="ip-chip" id="apexScore">Score: 0</div>
+              <div class="ip-chip" id="apexStatus">Ready</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="card">
+      <div class="card-inner">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:mikewood@yahoo.com">mikewood@yahoo.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 King's Gaming Zone — Built for GitHub Pages. No fixed IP on Pages; use a custom domain with CNAME if needed.</p>
+  </footer>
+
+<script>
+  // ===== IP FETCHER =====
+  const ipBtn = document.getElementById('getIpBtn');
+  const copyBtn = document.getElementById('copyIpBtn');
+  const ipVal = document.getElementById('ipVal');
+
+  async function fetchIP(){
+    ipVal.textContent = 'IP: fetching…';
+    try{
+      const r = await fetch('https://api.ipify.org?format=json');
+      const j = await r.json();
+      ipVal.textContent = 'IP: ' + j.ip;
+    }catch(e){
+      ipVal.textContent = 'IP: unavailable';
+    }
+  }
+  ipBtn.addEventListener('click', fetchIP);
+  copyBtn.addEventListener('click', async ()=>{
+    const t = ipVal.textContent.replace('IP: ','');
+    try{ await navigator.clipboard.writeText(t); copyBtn.textContent='Copied!'; setTimeout(()=>copyBtn.textContent='Copy',1200);}catch(e){ alert('Copy failed'); }
+  });
+
+  // ===== INPUT HANDLING (shared) =====
+  const Keys = {left:false,right:false,up:false,down:false,space:false};
+  window.addEventListener('keydown', (e)=>{
+    if(['ArrowLeft','a','A'].includes(e.key)) Keys.left=true;
+    if(['ArrowRight','d','D'].includes(e.key)) Keys.right=true;
+    if(['ArrowUp','w','W'].includes(e.key)) Keys.up=true;
+    if(['ArrowDown','s','S'].includes(e.key)) Keys.down=true;
+    if(e.code==='Space') { Keys.space=true; e.preventDefault(); }
+  });
+  window.addEventListener('keyup', (e)=>{
+    if(['ArrowLeft','a','A'].includes(e.key)) Keys.left=false;
+    if(['ArrowRight','d','D'].includes(e.key)) Keys.right=false;
+    if(['ArrowUp','w','W'].includes(e.key)) Keys.up=false;
+    if(['ArrowDown','s','S'].includes(e.key)) Keys.down=false;
+    if(e.code==='Space') Keys.space=false;
+  });
+
+  // ===== SUBWAR: SURFACES =====
+  (function(){
+    const canvas = document.getElementById('subCanvas');
+    const ctx = canvas.getContext('2d');
+    const startBtn = document.getElementById('subStart');
+    const scoreEl = document.getElementById('subScore');
+    const statusEl = document.getElementById('subStatus');
+
+    let sub, mines, lastSpawn, running, score, t0;
+
+    function reset(){
+      sub = {x: 80, y: canvas.height/2, r: 14, vx:0, vy:0};
+      mines = []; lastSpawn = 0; running=false; score=0; t0=performance.now();
+      scoreEl.textContent = 'Score: 0'; statusEl.textContent='Ready';
+      draw();
+    }
+
+    function spawnMine(time){
+      if(time - lastSpawn > 800){
+        lastSpawn = time;
+        const y = 40 + Math.random()*(canvas.height-80);
+        const r = 10 + Math.random()*14;
+        const v = 2.2 + Math.random()*2.2;
+        mines.push({x: canvas.width + r, y, r, vx: -v});
+      }
+    }
+
+    function update(dt, time){
+      // controls & damping (buoyancy feel)
+      const acc = 0.25; const maxv=3.6; const damp=0.92;
+      if(Keys.left) sub.vx -= acc; if(Keys.right) sub.vx += acc;
+      if(Keys.up) sub.vy -= acc; if(Keys.down) sub.vy += acc;
+      sub.vx *= damp; sub.vy *= damp;
+      sub.vx = Math.max(-maxv, Math.min(maxv, sub.vx));
+      sub.vy = Math.max(-maxv, Math.min(maxv, sub.vy));
+      sub.x += sub.vx; sub.y += sub.vy;
+      sub.x = Math.max(sub.r, Math.min(canvas.width-sub.r, sub.x));
+      sub.y = Math.max(sub.r, Math.min(canvas.height-sub.r, sub.y));
+
+      // mines
+      for(const m of mines){ m.x += m.vx; }
+      while(mines.length && mines[0].x < -40) mines.shift();
+
+      // collision
+      for(const m of mines){
+        const dx=sub.x-m.x, dy=sub.y-m.y; if(dx*dx+dy*dy < (sub.r+m.r)*(sub.r+m.r)) { running=false; statusEl.textContent='💥 Hit a mine!'; }
+      }
+
+      // score
+      score = Math.floor((time - t0)/1000);
+      scoreEl.textContent = 'Score: ' + score;
+    }
+
+    function draw(){
+      // background water and bubbles
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      const grd = ctx.createLinearGradient(0,0,0,canvas.height);
+      grd.addColorStop(0,'#07233d'); grd.addColorStop(1,'#031421');
+      ctx.fillStyle = grd; ctx.fillRect(0,0,canvas.width,canvas.height);
+
+      // seabed
+      ctx.fillStyle = '#0b1d2c'; ctx.fillRect(0, canvas.height-30, canvas.width, 30);
+
+      // sub
+      ctx.save();
+      ctx.translate(sub.x, sub.y);
+      ctx.fillStyle = '#00eaff';
+      ctx.beginPath(); ctx.ellipse(0,0,24,14,0,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#001b26'; ctx.fillRect(6,-6,20,12); // cabin
+      ctx.fillStyle = '#7cffcb'; ctx.beginPath(); ctx.arc(-10,0,6,0,Math.PI*2); ctx.fill();
+      ctx.restore();
+
+      // mines
+      for(const m of mines){
+        ctx.save(); ctx.translate(m.x, m.y);
+        ctx.fillStyle = '#ff3efc'; ctx.beginPath(); ctx.arc(0,0,m.r,0,Math.PI*2); ctx.fill();
+        ctx.strokeStyle='rgba(255,255,255,.3)'; ctx.beginPath(); ctx.arc(0,0,m.r+4,0,Math.PI*2); ctx.stroke();
+        ctx.restore();
+      }
+
+      // HUD
+      if(!running){
+        ctx.fillStyle='rgba(0,0,0,.35)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle='#e6f6ff'; ctx.font='700 22px System-UI'; ctx.textAlign='center';
+        ctx.fillText('Press Start to dive', canvas.width/2, canvas.height/2);
+      }
+    }
+
+    function loop(time){
+      if(running){
+        spawnMine(time);
+        update(16,time);
+      }
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    startBtn.addEventListener('click', ()=>{ running=true; statusEl.textContent='Running'; t0=performance.now(); mines=[]; lastSpawn=0; });
+
+    reset();
+    requestAnimationFrame(loop);
+  })();
+
+  // ===== APEX ARENA (arcade shooter) =====
+  (function(){
+    const canvas = document.getElementById('apexCanvas');
+    const ctx = canvas.getContext('2d');
+    const startBtn = document.getElementById('apexStart');
+    const scoreEl = document.getElementById('apexScore');
+    const statusEl = document.getElementById('apexStatus');
+
+    let p, bullets, foes, running, score, lastShot, lastSpawn, t0;
+
+    function reset(){
+      p = {x: canvas.width/2, y: canvas.height-36, w:26, h:16, vx:0};
+      bullets=[]; foes=[]; running=false; score=0; lastShot=0; lastSpawn=0; t0=performance.now();
+      scoreEl.textContent='Score: 0'; statusEl.textContent='Ready'; draw();
+    }
+
+    function spawnFoe(time){
+      if(time - lastSpawn > Math.max(400, 1200 - (time - t0)/3)){
+        lastSpawn = time;
+        const x = 20 + Math.random()*(canvas.width-40);
+        const vy = 1.6 + Math.random()*1.8;
+        foes.push({x, y:-20, r:12, vy});
+      }
+    }
+
+    function update(time){
+      // player move
+      const speed = 3.2;
+      if(Keys.left) p.x -= speed; if(Keys.right) p.x += speed; p.x = Math.max(18, Math.min(canvas.width-18, p.x));
+
+      // shooting
+      if(Keys.space && time - lastShot > 200){ bullets.push({x:p.x, y:p.y-14, vy:-5}); lastShot=time; }
+
+      for(const b of bullets){ b.y += b.vy; }
+      while(bullets.length && bullets[0].y < -30) bullets.shift();
+
+      for(const f of foes){ f.y += f.vy; }
+      while(foes.length && foes[0].y > canvas.height+40) foes.shift();
+
+      // collisions
+      for(let i=foes.length-1;i>=0;i--){
+        const f=foes[i];
+        // player hit
+        if(Math.abs(f.x - p.x) < f.r + p.w/2 && Math.abs(f.y - p.y) < f.r + p.h/2){ running=false; statusEl.textContent='☠ You got tagged'; }
+        // bullet hits
+        for(let j=bullets.length-1;j>=0;j--){ const b=bullets[j]; const dx=b.x-f.x, dy=b.y-f.y; if(dx*dx+dy*dy < (f.r+4)*(f.r+4)){ foes.splice(i,1); bullets.splice(j,1); score+=10; break; } }
+      }
+
+      scoreEl.textContent='Score: '+score;
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      const grd = ctx.createLinearGradient(0,0,0,canvas.height);
+      grd.addColorStop(0,'#0b0f1e'); grd.addColorStop(1,'#1a1f34');
+      ctx.fillStyle = grd; ctx.fillRect(0,0,canvas.width,canvas.height);
+
+      // player
+      ctx.save(); ctx.translate(p.x,p.y);
+      ctx.fillStyle='#5b8cff'; ctx.beginPath(); ctx.moveTo(0,-12); ctx.lineTo(14,12); ctx.lineTo(-14,12); ctx.closePath(); ctx.fill();
+      ctx.fillStyle='#00eaff'; ctx.fillRect(-4,-6,8,6);
+      ctx.restore();
+
+      // bullets
+      ctx.fillStyle='#7cffcb'; for(const b of bullets){ ctx.fillRect(b.x-2,b.y-8,4,8); }
+
+      // foes
+      for(const f of foes){ ctx.fillStyle='#ff3efc'; ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,Math.PI*2); ctx.fill(); }
+
+      if(!running){
+        ctx.fillStyle='rgba(0,0,0,.35)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle='#e6f6ff'; ctx.font='700 22px System-UI'; ctx.textAlign='center';
+        ctx.fillText('Press Start then use ← → and Space', canvas.width/2, canvas.height/2);
+      }
+    }
+
+    function loop(time){
+      if(running){ spawnFoe(time); update(time); }
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    startBtn.addEventListener('click', ()=>{ running=true; foes=[]; bullets=[]; score=0; t0=performance.now(); statusEl.textContent='Running'; });
+
+    reset(); requestAnimationFrame(loop);
+  })();
+</script>
+</body>
+</html>
